@@ -1,0 +1,26 @@
+{
+	"name": "test-project",
+	"version": "1.0.0",
+	"description": "Test exercise on AngularJS",
+        "repository": "https://github.com/romanskyd/task_builder",
+	"main": "index.html",
+	"scripts": {
+		"start": "gulp default",
+		"gulp": "gulp default"
+	},
+    "dependencies": {
+		"angular": "1.5.5",
+		"angular-route": "1.5.5",
+		"angular-animate": "1.5.5",
+		"bootstrap3": "3.3.5",
+		"angular-ui-bootstrap": "",
+		"gulp": "3.9.1 ",
+		"gulp-inject": "4.3.2",
+		"browser-sync" : "2.24.7",
+		"jquery": "3.3.1",
+		"jquery-ui-dist": "1.12.1",
+		"angular-drag-and-drop-lists": ""
+	},
+	"author": "Dmitry Romansky",
+	"license": "MIT"
+}

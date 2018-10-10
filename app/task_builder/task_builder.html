@@ -1,0 +1,82 @@
+<div class="container">
+	<div class="row">
+	  	<div class="col-md-12 ">
+			<h2>Task Builder</h2>
+	  	</div>
+	</div>
+</div>
+  	<div class="container" ng-controller="taskBuilderCtrl">
+	  	<div class="col-lg-5 col-md-6 col-sm-8"
+	   	dnd-list="data"
+	   	dnd-allowed-types="['stage']"
+	   	dnd-dragover="dragoverCallback(index, external, type, callback)"
+    	dnd-drop="dropCallback(index, item, external, type)"
+	   >
+		  <div class="row" ng-repeat="stage in data"
+			dnd-draggable="stage"
+			dnd-moved="data.splice($index, 1)"
+			dnd-effect-allowed="move"
+			dnd-type="'stage'">
+			<div >
+			  <div>
+				<uib-accordion close-others="oneAtATime">
+				  <div uib-accordion-group class="panel-default" ng-click="status.open = !status.open">
+					  <uib-accordion-heading>
+						{{stage.stage_title}}<i class="pull-right glyphicon"></i>
+					  </uib-accordion-heading>
+					  <div class="row">
+						<div class="col-md-12 stage">
+						  <div class="stage-title" ng-click="changeStageTitle(stage, $index)">{{stage.stage_title | limitTo: 7}}{{stage.stage_title.length > 10 ? '...' : ''}}</div>
+						  <div class="stage-time">
+							<div class="stage-time-title">
+							  Время
+							</div>
+							<div class="stage-time-value">
+							  {{getStageTime(stage.stage_items)}}
+							</div> 
+						  </div>
+						</div>
+					  </div>
+					  <div dnd-list="stage.stage_items"
+						dnd-allowed-types="['step']">
+						  <div class="row step red" ng-repeat="step in stage.stage_items"
+							dnd-draggable="step"
+							dnd-type="'step'"
+							dnd-moved="stage.stage_items.splice($index, 1)">
+							<div class="col-xs-4">
+							  <div class="step-title">Шаг №{{step.step_id}}</div>
+							</div>
+							<div class="col-xs-8">
+							<div class="task-nest" dnd-list="step.step_items"
+								dnd-drop="dropCallback(index, item, external, type)"
+								dnd-allowed-types="['task']">
+								  <span class="task-element" ng-repeat="task in step.step_items"
+								  dnd-draggable="task"
+								  dnd-type="'task'"
+								  dnd-moved="taskSplice(step.step_items, $index, stage.stage_items)">
+									<span class="circle task-circle"  ng-click="openEditTaskModal(task, step.step_items, $index, stage.stage_items)">
+										<i class="glyphicon glyphicon-list"></i>
+									</span>
+									№{{task.id}}
+								  </span>
+								</div>
+							</div>
+						  </div>
+					  </div>
+				  </div>
+				</uib-accordion>
+			  </div>
+			</div>
+		  </div>
+	  </div>
+	  <div class="row buttons-group">
+		<div class="col-sm-12">
+		  <button class="btn btn-default" ng-click="openCreateTaskModal(event)">Добавить задачу</button>
+		</div>
+		<div class="col-sm-12">
+		  <button class="btn btn-default" ng-click="clearAll()">Очистить всё</button>
+		</div>
+	  </div>
+  </div>
+
+		

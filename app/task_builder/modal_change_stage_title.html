@@ -1,0 +1,12 @@
+<div class="modal-header"><h4>Изменить название этапа</h4></div>
+<form>
+	<div class="modal-body">
+        <div class="form-group"  ng-class="{'has-error' : titleError}">
+        <label for="title">Название этапа</label>
+        <input type="text" class="form-control" id="title" placeholder="Введите название этапа" ng-model="stage.stage_title" required>
+        </div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary" ng-click="add(stage)">Сохранить</button>
+		<button type="button" class="btn btn-warning" ng-click="cancel()">Отмена</button>
+	</div>
+</form>
